@@ -125,8 +125,16 @@ body::after{
 }
 .intro-hint::after{content:'';width:1px;height:40px;background:var(--gold);animation:introPulse 2s ease-in-out infinite;}
 @keyframes introPulse{0%,100%{opacity:.3;transform:scaleY(.6);}50%{opacity:1;transform:scaleY(1);}}
-/* masque l'en-tête et le bouton WhatsApp pendant l'intro */
+/* masque le bouton WhatsApp pendant l'intro */
 header.intro-hide,.wa-float.intro-hide{opacity:0;pointer-events:none;transition:opacity .4s var(--ease);}
+/* barre du haut transparente sur la photo : léger ombrage pour la lisibilité */
+header.on-photo .logo-aw,
+header.on-photo .logo-riviera,
+header.on-photo .logo-tag,
+header.on-photo nav a,
+header.on-photo .nav-cta,
+header.on-photo #lang-toggle button{text-shadow:0 1px 14px rgba(0,0,0,.55);}
+header.on-photo .logo-wave svg{filter:drop-shadow(0 1px 8px rgba(0,0,0,.5));}
 @media(prefers-reduced-motion:reduce){
   .intro{height:100vh;}
   .intro-hint::after{animation:none;}
@@ -1073,11 +1081,10 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
 </footer>
 
 <script>
-// ── HEADER SCROLL ──
+// ── HEADER ──
+// L'état de l'en-tête est piloté par l'intro (transparent sur la photo,
+// puis fond marine une fois l'image disparue). Voir la section INTRO.
 const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 60);
-});
 
 // ── INTRO : média à expansion au scroll ──
 (function(){
@@ -1116,9 +1123,13 @@ window.addEventListener('scroll', () => {
     title.style.opacity = String(1 - smoothstep(0.45, 0.9, p));
     hint.style.opacity  = String(1 - smoothstep(0, 0.12, raw));
 
-    const hidden = p < 0.98;
-    header.classList.toggle('intro-hide', hidden);
-    if (wa) wa.classList.toggle('intro-hide', hidden);
+    // Barre du haut : visible et transparente sur la photo pendant l'intro,
+    // puis fond marine (état "scrolled") une fois l'image disparue.
+    const inIntro = raw < 1;
+    header.classList.remove('intro-hide');
+    header.classList.toggle('on-photo', inIntro);
+    header.classList.toggle('scrolled', !inIntro && window.scrollY > 60);
+    if (wa) wa.classList.toggle('intro-hide', inIntro);
   }
 
   function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(apply); } }
