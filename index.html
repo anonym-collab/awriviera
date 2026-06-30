@@ -89,6 +89,49 @@ body::after{
 .reveal-d2{transition-delay:.16s;}
 .reveal-d3{transition-delay:.24s;}
 
+/* ── INTRO (média à expansion au scroll) ── */
+.intro{position:relative;height:240vh;background:var(--navy);}
+.intro-sticky{
+  position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;background:var(--navy);
+}
+.intro-bg{position:absolute;inset:0;z-index:0;will-change:opacity;}
+.intro-bg img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.intro-bg-overlay{position:absolute;inset:0;background:rgba(5,12,22,.5);}
+.intro-media{
+  position:absolute;top:50%;left:50%;z-index:2;
+  transform:translate(-50%,-50%);
+  width:320px;height:440px;max-width:96vw;
+  overflow:hidden;border-radius:18px;
+  box-shadow:0 40px 90px -25px rgba(0,0,0,.7);
+  will-change:width,height,border-radius;
+}
+.intro-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.intro-media-shade{position:absolute;inset:0;background:rgba(5,12,22,.22);}
+.intro-title{
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:4;
+  display:flex;align-items:center;justify-content:center;gap:.35em;
+  mix-blend-mode:difference;color:#fff;pointer-events:none;
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  text-transform:uppercase;letter-spacing:6px;
+  will-change:opacity;
+}
+.intro-word{font-size:clamp(46px,11vw,150px);line-height:1;display:inline-block;will-change:transform;}
+.intro-word#introWordR{font-style:italic;}
+.intro-hint{
+  position:absolute;bottom:42px;left:0;right:0;z-index:4;text-align:center;
+  font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--cream);
+  display:flex;flex-direction:column;align-items:center;gap:14px;will-change:opacity;
+}
+.intro-hint::after{content:'';width:1px;height:40px;background:var(--gold);animation:introPulse 2s ease-in-out infinite;}
+@keyframes introPulse{0%,100%{opacity:.3;transform:scaleY(.6);}50%{opacity:1;transform:scaleY(1);}}
+/* masque l'en-tête et le bouton WhatsApp pendant l'intro */
+header.intro-hide,.wa-float.intro-hide{opacity:0;pointer-events:none;transition:opacity .4s var(--ease);}
+@media(prefers-reduced-motion:reduce){
+  .intro{height:100vh;}
+  .intro-hint::after{animation:none;}
+}
+
 /* ── HEADER ── */
 header{
   position:fixed;top:0;left:0;right:0;z-index:1000;
@@ -532,7 +575,7 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
 
 <!-- HEADER -->
 <header id="header">
-  <a href="#hero" class="logo">
+  <a href="#intro" class="logo">
     <span class="logo-aw">AW</span>
     <div class="logo-sep"></div>
     <div class="logo-right">
@@ -561,43 +604,27 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-watermark">AW</div>
-  <div class="hero-line"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow reveal">Yacht Brokerage &amp; Luxury Charter · Méditerranée</div>
-    <h1 class="hero-h1 reveal reveal-d1">
-      <span>L'expertise</span>
-      <span><em>maritime</em></span>
-      <span>à votre service</span>
-    </h1>
-    <p class="hero-sub reveal reveal-d2">AW Riviera sélectionne pour vous les meilleurs yachts, villas et expériences en Méditerranée. Une recommandation de marin, pas de commercial.</p>
-    <div class="hero-actions reveal reveal-d3">
-      <a href="#contact" class="btn-primary">Votre demande sur mesure</a>
-      <a href="#services" class="btn-ghost">Découvrir</a>
+<!-- INTRO — MÉDIA À EXPANSION AU SCROLL -->
+<section class="intro" id="intro">
+  <div class="intro-sticky">
+    <div class="intro-bg" id="introBg">
+      <img src="images/cote-azur.jpg" alt="" aria-hidden="true">
+      <div class="intro-bg-overlay"></div>
     </div>
+
+    <div class="intro-media" id="introMedia">
+      <!-- PLACEHOLDER yacht — à remplacer par votre photo/vidéo -->
+      <img src="images/ibiza.jpg" alt="Yacht en navigation">
+      <div class="intro-media-shade"></div>
+    </div>
+
+    <div class="intro-title" id="introTitle">
+      <span class="intro-word" id="introWordL">AW</span>
+      <span class="intro-word" id="introWordR">Riviera</span>
+    </div>
+
+    <div class="intro-hint" id="introHint">Défiler pour découvrir</div>
   </div>
-
-  <div class="hero-stats">
-    <div class="hero-stat reveal">
-      <div class="hero-stat-num">15<sup>+</sup></div>
-      <div class="hero-stat-label">Destinations</div>
-    </div>
-    <div class="hero-stat reveal reveal-d1">
-      <div class="hero-stat-num">100<sup>+</sup></div>
-      <div class="hero-stat-label">Yachts sélectionnés</div>
-    </div>
-    <div class="hero-stat reveal reveal-d2">
-      <div class="hero-stat-num">24<sup>h</sup></div>
-      <div class="hero-stat-label">Réponse garantie</div>
-    </div>
-  </div>
-
-  <div class="hero-scroll"><span>Découvrir</span></div>
 </section>
 
 <!-- ABOUT -->
@@ -1025,7 +1052,7 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
 
 <!-- FOOTER -->
 <footer>
-  <a href="#hero" class="logo footer-logo">
+  <a href="#intro" class="logo footer-logo">
     <span class="logo-aw">AW</span>
     <div class="logo-sep"></div>
     <div class="logo-right">
@@ -1051,6 +1078,54 @@ const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 60);
 });
+
+// ── INTRO : média à expansion au scroll ──
+(function(){
+  const intro = document.getElementById('intro');
+  if (!intro) return;
+  const media = document.getElementById('introMedia');
+  const bg    = document.getElementById('introBg');
+  const title = document.getElementById('introTitle');
+  const wordL = document.getElementById('introWordL');
+  const wordR = document.getElementById('introWordR');
+  const hint  = document.getElementById('introHint');
+  const wa    = document.querySelector('.wa-float');
+  const minW = 320, minH = 440;
+  let ticking = false;
+
+  const smoothstep = (a, b, x) => { const t = Math.min(Math.max((x - a) / (b - a), 0), 1); return t * t * (3 - 2 * t); };
+
+  function apply(){
+    ticking = false;
+    const total = intro.offsetHeight - window.innerHeight;
+    const scrolled = Math.min(Math.max(-intro.getBoundingClientRect().top, 0), Math.max(total, 0));
+    const raw = total > 0 ? scrolled / total : 1;
+    // le média atteint le plein écran à 80% du parcours, puis se maintient
+    const p = Math.min(raw / 0.8, 1);
+
+    media.style.maxWidth = 'none';
+    media.style.width  = (minW + p * (window.innerWidth  - minW)) + 'px';
+    media.style.height = (minH + p * (window.innerHeight - minH)) + 'px';
+    media.style.borderRadius = (18 * (1 - p)) + 'px';
+
+    bg.style.opacity = String(1 - p);
+
+    const tx = p * 26;
+    wordL.style.transform = 'translateX(-' + tx + 'vw)';
+    wordR.style.transform = 'translateX('  + tx + 'vw)';
+    title.style.opacity = String(1 - smoothstep(0.45, 0.9, p));
+    hint.style.opacity  = String(1 - smoothstep(0, 0.12, raw));
+
+    const hidden = p < 0.98;
+    header.classList.toggle('intro-hide', hidden);
+    if (wa) wa.classList.toggle('intro-hide', hidden);
+  }
+
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(apply); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', apply);
+  apply();
+})();
 
 // ── REVEAL ON SCROLL ──
 const _io = new IntersectionObserver((entries) => {
@@ -1167,6 +1242,7 @@ const _T = {
   fr: {
     nav: ['Approche','Services','Traiteur','Destinations','Contact'],
     navCta: 'Demande privée',
+    introHint: 'Défiler pour découvrir',
     heroEyebrow: 'Yacht Brokerage &amp; Luxury Charter · Méditerranée',
     heroH1: ["L'expertise", '<em>maritime</em>', 'à votre service'],
     heroSub: "AW Riviera sélectionne pour vous les meilleurs yachts, villas et expériences en Méditerranée. Une recommandation de marin, pas de commercial.",
@@ -1256,6 +1332,7 @@ const _T = {
   en: {
     nav: ['Approach','Services','Catering','Destinations','Contact'],
     navCta: 'Private Enquiry',
+    introHint: 'Scroll to discover',
     heroEyebrow: 'Yacht Brokerage &amp; Luxury Charter · Mediterranean',
     heroH1: ['Maritime', '<em>expertise</em>', 'at your service'],
     heroSub: "AW Riviera handpicks the finest yachts, villas and experiences across the Mediterranean. A sailor's recommendation, not a salesperson's.",
@@ -1358,6 +1435,8 @@ function setLang(lang) {
   document.querySelectorAll('nav > a:not(.nav-cta)').forEach((a, i) => { if (t.nav[i]) a.textContent = t.nav[i]; });
   const navCta = document.querySelector('nav .nav-cta');
   if (navCta) navCta.textContent = t.navCta;
+  const introHint = document.getElementById('introHint');
+  if (introHint && t.introHint) introHint.textContent = t.introHint;
 
   // HERO
   const heroEyebrow = document.querySelector('.hero-eyebrow');
