@@ -902,20 +902,21 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
     </div>
   </div>
   <div class="contact-right reveal reveal-d1">
-    <div class="contact-form">
+    <form class="contact-form" id="aw-form" method="POST" action="https://formspree.io/f/YOUR_FORM_ID">
+      <input type="hidden" name="_subject" value="Nouvelle demande — AW Riviera">
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Prénom &amp; Nom</label>
-          <input type="text" class="form-input" placeholder="Votre nom">
+          <input type="text" name="nom" class="form-input" placeholder="Votre nom" required>
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input type="email" class="form-input" placeholder="votre@email.com">
+          <input type="email" name="email" class="form-input" placeholder="votre@email.com" required>
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Je suis intéressé par</label>
-        <select class="form-select form-input">
+        <select name="service" class="form-select form-input">
           <option value="">Sélectionner un service</option>
           <option>Charter yacht — location à la semaine</option>
           <option>Achat de yacht</option>
@@ -928,19 +929,19 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Destination souhaitée</label>
-          <input type="text" class="form-input" placeholder="Ex : Côte d'Azur, Grèce...">
+          <input type="text" name="destination" class="form-input" placeholder="Ex : Côte d'Azur, Grèce...">
         </div>
         <div class="form-group">
           <label class="form-label">Période envisagée</label>
-          <input type="text" class="form-input" placeholder="Ex : Juillet 2025">
+          <input type="text" name="periode" class="form-input" placeholder="Ex : Juillet 2025">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Votre demande</label>
-        <textarea class="form-textarea" placeholder="Partagez vos envies en quelques mots..."></textarea>
+        <textarea name="message" class="form-textarea" placeholder="Partagez vos envies en quelques mots..."></textarea>
       </div>
-      <button class="form-submit">Envoyer ma demande →</button>
-    </div>
+      <button type="submit" class="form-submit">Envoyer ma demande →</button>
+    </form>
   </div>
 </section>
 
@@ -981,19 +982,49 @@ const _io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.reveal').forEach(el => _io.observe(el));
 
-// ── CONTACT FORM ──
-document.querySelector('.form-submit').addEventListener('click', function(e){
-  e.preventDefault();
-  const original = this.textContent;
-  this.textContent = 'Message envoyé ✓';
-  this.style.background = '#2D6A4F';
-  this.style.color = '#fff';
-  setTimeout(() => {
-    this.textContent = original;
-    this.style.background = '';
-    this.style.color = '';
-  }, 3000);
-});
+// ── CONTACT FORM (Formspree) ──
+const _awForm = document.getElementById('aw-form');
+if (_awForm) {
+  _awForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    const original = btn.textContent;
+    const notConfigured = this.action.includes('YOUR_FORM_ID');
+
+    // Tant que l'ID Formspree n'est pas renseigné : démo visuelle uniquement.
+    if (notConfigured) {
+      btn.textContent = 'Message envoyé ✓';
+      btn.style.background = '#2D6A4F'; btn.style.color = '#fff';
+      setTimeout(() => { btn.textContent = original; btn.style.background = ''; btn.style.color = ''; }, 3000);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Envoi…';
+    try {
+      const res = await fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.textContent = 'Message envoyé ✓';
+        btn.style.background = '#2D6A4F'; btn.style.color = '#fff';
+        this.reset();
+      } else {
+        throw new Error('submit failed');
+      }
+    } catch (err) {
+      btn.textContent = 'Erreur — réessayez';
+      btn.style.background = '#8A2D2D'; btn.style.color = '#fff';
+    } finally {
+      setTimeout(() => {
+        btn.disabled = false; btn.textContent = original;
+        btn.style.background = ''; btn.style.color = '';
+      }, 3500);
+    }
+  });
+}
 
 // ── PHOTO REPLACEMENT ──
 function replaceDestPhoto(input, index) {
