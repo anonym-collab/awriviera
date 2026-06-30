@@ -220,28 +220,30 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .hero-stat-label{font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-top:6px;}
 
 /* ── SECTION SHELL ── */
-.section-header{text-align:center;margin-bottom:80px;}
-.section-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+.section-header{text-align:center;margin-bottom:96px;}
+.section-header::before{content:'';display:block;width:38px;height:1px;background:var(--gold);margin:0 auto 30px;opacity:.85;}
+.section-eyebrow{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
 .section-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:52px;font-weight:300;color:var(--white);line-height:1.12;letter-spacing:.5px;
+  font-size:60px;font-weight:300;color:var(--white);line-height:1.1;letter-spacing:.5px;
 }
 .section-title em{font-style:italic;color:var(--gold2);}
 
 /* ── ABOUT ── */
 .about{
-  padding:140px 64px;
-  display:grid;grid-template-columns:1fr 1fr;gap:110px;
+  padding:172px 64px;
+  display:grid;grid-template-columns:1.05fr 1fr;gap:128px;
   align-items:center;border-top:1px solid var(--border2);
 }
-.about-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;}
+.about-eyebrow{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;}
 .about-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:50px;font-weight:300;color:var(--white);
-  line-height:1.12;margin-bottom:32px;letter-spacing:.5px;
+  font-size:56px;font-weight:300;color:var(--white);
+  line-height:1.08;margin-bottom:36px;letter-spacing:.5px;
 }
 .about-title em{font-style:italic;color:var(--gold2);}
 .about-text{font-size:14px;color:var(--muted2);line-height:2;margin-bottom:22px;letter-spacing:.2px;}
+.about-lead{font-size:20px;line-height:1.75;color:var(--cream);font-weight:300;margin-bottom:24px;}
 .about-signature{
   font-family:'Cormorant Garamond',serif;
   font-size:30px;font-style:italic;color:var(--gold2);
@@ -262,7 +264,7 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .about-pillar-text{font-size:12px;color:var(--muted);line-height:1.8;}
 
 /* ── SERVICES ── */
-.services{padding:140px 64px;border-top:1px solid var(--border2);}
+.services{padding:172px 64px;border-top:1px solid var(--border2);}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);}
 .service{
   background:var(--navy);padding:54px 40px;
@@ -288,7 +290,7 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .service-items li::before{content:'—  ';color:var(--gold);font-size:10px;}
 
 /* ── DESTINATIONS ── */
-.destinations{padding:140px 0 0;border-top:1px solid var(--border2);}
+.destinations{padding:172px 0 0;border-top:1px solid var(--border2);}
 .destinations .section-header{padding:0 64px;}
 .dest-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,360px);gap:3px;}
 .dest{position:relative;overflow:hidden;cursor:pointer;background:var(--navy2);}
@@ -331,7 +333,7 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .dest-photo-replace:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
 
 /* ── PROCESS ── */
-.process{padding:140px 64px;border-top:1px solid var(--border2);background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);}
+.process{padding:172px 64px;border-top:1px solid var(--border2);background:linear-gradient(180deg,var(--navy) 0%,var(--navy2) 100%);}
 .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:80px;position:relative;}
 .process-steps::before{content:'';position:absolute;top:28px;left:11%;right:11%;height:1px;background:var(--border);z-index:0;}
 .process-step{text-align:center;padding:0 22px;position:relative;z-index:1;}
@@ -346,7 +348,7 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .process-text{font-size:12px;color:var(--muted);line-height:1.8;}
 
 /* ── CATERING ── */
-.catering{padding:140px 64px;border-top:1px solid var(--border2);background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%);}
+.catering{padding:172px 64px;border-top:1px solid var(--border2);background:linear-gradient(180deg,var(--navy2) 0%,var(--navy) 100%);}
 .catering-intro{max-width:640px;margin:0 auto 88px;text-align:center;}
 .catering-intro p{font-size:14px;color:var(--muted2);line-height:2;}
 .catering-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border:1px solid var(--border2);margin-bottom:88px;}
@@ -428,7 +430,7 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .catering-note-cta:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 14px 34px -16px rgba(198,162,86,.7);}
 
 /* ── CONTACT ── */
-.contact{padding:140px 64px;border-top:1px solid var(--border2);display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start;}
+.contact{padding:172px 64px;border-top:1px solid var(--border2);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
 .contact-title{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--white);line-height:1.06;margin-bottom:28px;letter-spacing:.5px;}
 .contact-title em{font-style:italic;color:var(--gold2);}
 .contact-text{font-size:14px;color:var(--muted2);line-height:2;margin-bottom:44px;}
@@ -601,11 +603,10 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-left reveal">
-    <div class="about-eyebrow">Notre ADN</div>
-    <h2 class="about-title">Une agence fondée<br>par un <em>marin</em></h2>
-    <p class="about-text">AW Riviera n'est pas une agence comme les autres. Elle est fondée par un professionnel de la mer ayant navigué sur les plus beaux yachts de Méditerranée et d'ailleurs — sous pavillon étranger, toutes mers.</p>
-    <p class="about-text">Cette expertise terrain unique nous permet de vous recommander uniquement ce que nous connaissons réellement : l'état d'un bateau, la qualité d'un équipage, la vérité d'une destination. Jamais un catalogue. Toujours une relation de confiance.</p>
-    <p class="about-text">Que vous cherchiez à louer, acheter, ou simplement organiser une escapade parfaite, AW Riviera est votre interlocuteur unique pour tout ce que la Méditerranée offre de meilleur.</p>
+    <div class="about-eyebrow">La Maison</div>
+    <h2 class="about-title">L'exigence du yachting,<br><em>en toute discrétion</em></h2>
+    <p class="about-text about-lead">AW Riviera orchestre des expériences yachting sur mesure en Méditerranée — charter, acquisition et art de vivre.</p>
+    <p class="about-text">Une sélection rigoureuse, un interlocuteur unique, une discrétion absolue.</p>
     <div class="about-signature">
       AW Riviera
       <div class="about-sign-sub">Cannes · Monaco · Méditerranée</div>
@@ -614,8 +615,8 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
   <div class="about-right">
     <div class="about-pillar reveal">
       <div class="about-pillar-num">01</div>
-      <div class="about-pillar-title">Crédibilité terrain</div>
-      <div class="about-pillar-text">Nous naviguons sur ces bateaux. Nous connaissons leurs qualités réelles, leurs équipages, et leur adéquation à chaque client.</div>
+      <div class="about-pillar-title">Expertise réelle</div>
+      <div class="about-pillar-text">Une connaissance fine des bateaux, des équipages et des destinations. Nous ne recommandons que l'excellence.</div>
     </div>
     <div class="about-pillar reveal reveal-d1">
       <div class="about-pillar-num">02</div>
@@ -1172,17 +1173,16 @@ const _T = {
     heroBtnP: 'Votre demande sur mesure',
     heroBtnG: 'Découvrir',
     heroStats: ['Destinations','Yachts sélectionnés','Réponse garantie'],
-    aboutEyebrow: 'Notre ADN',
-    aboutTitle: 'Une agence fondée<br>par un <em>marin</em>',
+    aboutEyebrow: 'La Maison',
+    aboutTitle: "L'exigence du yachting,<br><em>en toute discrétion</em>",
     aboutTexts: [
-      "AW Riviera n'est pas une agence comme les autres. Elle est fondée par un professionnel de la mer ayant navigué sur les plus beaux yachts de Méditerranée et d'ailleurs — sous pavillon étranger, toutes mers.",
-      "Cette expertise terrain unique nous permet de vous recommander uniquement ce que nous connaissons réellement : l'état d'un bateau, la qualité d'un équipage, la vérité d'une destination. Jamais un catalogue. Toujours une relation de confiance.",
-      "Que vous cherchiez à louer, acheter, ou simplement organiser une escapade parfaite, AW Riviera est votre interlocuteur unique pour tout ce que la Méditerranée offre de meilleur."
+      'AW Riviera orchestre des expériences yachting sur mesure en Méditerranée — charter, acquisition et art de vivre.',
+      'Une sélection rigoureuse, un interlocuteur unique, une discrétion absolue.'
     ],
     aboutSignSub: 'Cannes · Monaco · Méditerranée',
-    pillarTitles: ['Crédibilité terrain','Sélection exigeante','Service sur mesure','Discrétion totale'],
+    pillarTitles: ['Expertise réelle','Sélection exigeante','Service sur mesure','Discrétion totale'],
     pillarTexts: [
-      'Nous naviguons sur ces bateaux. Nous connaissons leurs qualités réelles, leurs équipages, et leur adéquation à chaque client.',
+      "Une connaissance fine des bateaux, des équipages et des destinations. Nous ne recommandons que l'excellence.",
       'Chaque yacht proposé a été évalué personnellement. Nous ne recommandons que ce que nous mettrions nos propres clients à bord.',
       'Chaque demande est unique. AW Riviera construit chaque expérience autour de vos envies, votre timing et vos exigences.',
       'La confidentialité fait partie de notre ADN. Vos projets, votre identité et vos attentes restent strictement privés.'
@@ -1262,17 +1262,16 @@ const _T = {
     heroBtnP: 'Your bespoke enquiry',
     heroBtnG: 'Discover',
     heroStats: ['Destinations','Curated yachts','Guaranteed response'],
-    aboutEyebrow: 'Our DNA',
-    aboutTitle: 'An agency founded<br>by a <em>sailor</em>',
+    aboutEyebrow: 'The House',
+    aboutTitle: 'Yachting at its finest,<br><em>in absolute discretion</em>',
     aboutTexts: [
-      'AW Riviera is no ordinary agency. It was founded by a maritime professional who has sailed the finest yachts across the Mediterranean and beyond — under foreign flag, all seas.',
-      'This unique field expertise allows us to recommend only what we truly know: the real condition of a vessel, the quality of its crew, the truth of a destination. Never a catalogue. Always a relationship built on trust.',
-      'Whether you are looking to charter, purchase, or simply plan the perfect escape, AW Riviera is your single point of contact for the very best the Mediterranean has to offer.'
+      'AW Riviera curates bespoke yachting experiences across the Mediterranean — charter, acquisition and the art of living.',
+      'A rigorous selection, a single point of contact, absolute discretion.'
     ],
     aboutSignSub: 'Cannes · Monaco · Mediterranean',
-    pillarTitles: ['Field Credibility','Rigorous Selection','Bespoke Service','Total Discretion'],
+    pillarTitles: ['Real Expertise','Rigorous Selection','Bespoke Service','Total Discretion'],
     pillarTexts: [
-      'We sail on these boats. We know their real qualities, their crews, and their suitability for each client.',
+      'A keen knowledge of the boats, the crews and the destinations. We recommend only excellence.',
       'Every yacht proposed has been personally evaluated. We only recommend what we would put our own clients aboard.',
       'Every request is unique. AW Riviera builds each experience around your desires, your timing and your requirements.',
       'Confidentiality is part of our DNA. Your projects, your identity and your expectations remain strictly private.'
