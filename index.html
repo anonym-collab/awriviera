@@ -335,23 +335,44 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 .catering-card-items li:last-child{border-bottom:none;}
 .catering-card-items li::before{content:'—  ';color:var(--gold);font-size:10px;}
 .pdf-zone{margin:0 40px;}
-.pdf-upload-btn{
-  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-  border:1px dashed var(--border);color:var(--muted);background:transparent;
-  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
-  padding:14px 20px;cursor:pointer;transition:all .3s var(--ease);font-weight:400;
-}
-.pdf-upload-btn:hover{border-color:var(--gold);color:var(--gold2);}
-.catering-pdf-btn{
+.catering-menu-btn{
   display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;
   border:1px solid var(--border);color:var(--gold2);background:transparent;cursor:pointer;
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  padding:13px 20px;text-decoration:none;transition:all .3s var(--ease);font-weight:400;
+  font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  padding:14px 20px;transition:all .3s var(--ease);font-weight:400;
 }
-.catering-pdf-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
-.catering-pdf-btn svg{flex-shrink:0;}
-.pdf-loaded-info{font-size:10px;color:var(--gold);letter-spacing:1px;margin-top:10px;text-align:center;display:flex;align-items:center;justify-content:center;gap:8px;}
-.pdf-loaded-info::before{content:'✓';font-size:11px;}
+.catering-menu-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.catering-menu-btn svg{flex-shrink:0;}
+
+/* ── PDF MENU MODAL (lightbox) ── */
+.menu-modal{
+  position:fixed;inset:0;z-index:2000;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:32px;
+  background:rgba(5,12,22,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s var(--ease);
+}
+.menu-modal.open{opacity:1;visibility:visible;}
+.menu-modal-bar{width:100%;max-width:920px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:20px;}
+.menu-modal-title{font-family:'Cormorant Garamond',serif;font-size:25px;color:var(--cream);font-weight:400;letter-spacing:.5px;}
+.menu-modal-close{
+  width:42px;height:42px;flex-shrink:0;
+  border:1px solid var(--border);background:transparent;color:var(--gold2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s var(--ease);
+}
+.menu-modal-close:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+.menu-modal-frame{
+  width:100%;max-width:920px;flex:1;max-height:82vh;background:#fff;
+  border:1px solid var(--border);box-shadow:0 30px 80px -30px rgba(0,0,0,.8);
+  transform:translateY(18px) scale(.985);transition:transform .35s var(--ease);
+}
+.menu-modal.open .menu-modal-frame{transform:none;}
+.menu-modal-frame iframe{width:100%;height:100%;border:none;display:block;}
+.menu-modal-hint{margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+@media(max-width:640px){
+  .menu-modal{padding:14px;}
+  .menu-modal-frame{max-height:80vh;}
+  .menu-modal-title{font-size:19px;}
+}
 .catering-note{text-align:center;border:1px solid var(--border2);padding:52px 60px;background:var(--navy2);}
 .catering-note-title{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--white);margin-bottom:14px;font-weight:300;}
 .catering-note-title em{font-style:italic;color:var(--gold2);}
@@ -765,7 +786,7 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
     <!-- LUNCH -->
     <div class="catering-card reveal">
       <div class="catering-card-photo-wrap">
-        <div class="catering-card-photo" id="photo-lunch" style="background-image:url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80')"></div>
+        <div class="catering-card-photo" id="photo-lunch" style="background-image:url('images/dejeuner.jpg')"></div>
         <label class="catering-photo-replace" title="Remplacer la photo">
           <input type="file" accept="image/*" onchange="replaceCateringPhoto(this,'lunch')" style="display:none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 5l4-4 4 4" stroke="currentColor" stroke-width="1.3"></path><rect x="1" y="11" width="12" height="2" rx="0.5" fill="currentColor" opacity=".4"></rect></svg>
@@ -783,17 +804,11 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
         <li>Sandwichs gastronomiques</li>
         <li>Desserts &amp; fruits de saison</li>
       </ul>
-      <div class="pdf-zone" id="zone-lunch">
-        <input type="file" accept=".pdf" id="upload-lunch" style="display:none" onchange="handlePDF(this,'lunch','Menu Déjeuner AW Riviera')">
-        <div class="pdf-upload-btn" id="upload-trigger-lunch" onclick="document.getElementById('upload-lunch').click()">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 5l4-4 4 4" stroke="currentColor" stroke-width="1.2"></path><path d="M1 11h12v2H1z" fill="currentColor" opacity=".3"></path></svg>
-          Ajouter le menu Déjeuner (PDF)
-        </div>
-        <a class="catering-pdf-btn" id="dl-lunch" style="display:none" download="Menu_Dejeuner_AW_Riviera.pdf" href="#">
+      <div class="pdf-zone">
+        <button type="button" class="catering-menu-btn" onclick="openMenu('menus/menu-dejeuner.pdf','Menu Déjeuner')">
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1h8l4 4v10H1V1z" stroke="currentColor" stroke-width="1" fill="none"></path><path d="M9 1v4h4" stroke="currentColor" stroke-width="1" fill="none"></path><path d="M4 9h6M7 7v4" stroke="currentColor" stroke-width="1"></path></svg>
-          Télécharger le menu Déjeuner
-        </a>
-        <div class="pdf-loaded-info" id="info-lunch" style="display:none">PDF enregistré</div>
+          <span>Voir le menu</span>
+        </button>
       </div>
     </div>
 
@@ -818,17 +833,11 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
         <li>Eaux premium &amp; softs</li>
         <li>Sélection spiritueux</li>
       </ul>
-      <div class="pdf-zone" id="zone-beverages">
-        <input type="file" accept=".pdf" id="upload-beverages" style="display:none" onchange="handlePDF(this,'beverages','Carte Boissons AW Riviera')">
-        <div class="pdf-upload-btn" id="upload-trigger-beverages" onclick="document.getElementById('upload-beverages').click()">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 5l4-4 4 4" stroke="currentColor" stroke-width="1.2"></path><path d="M1 11h12v2H1z" fill="currentColor" opacity=".3"></path></svg>
-          Ajouter la carte Boissons (PDF)
-        </div>
-        <a class="catering-pdf-btn" id="dl-beverages" style="display:none" download="Carte_Boissons_AW_Riviera.pdf" href="#">
+      <div class="pdf-zone">
+        <button type="button" class="catering-menu-btn" onclick="openMenu('menus/menu-boissons.pdf','Carte Boissons')">
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1h8l4 4v10H1V1z" stroke="currentColor" stroke-width="1" fill="none"></path><path d="M9 1v4h4" stroke="currentColor" stroke-width="1" fill="none"></path><path d="M4 9h6M7 7v4" stroke="currentColor" stroke-width="1"></path></svg>
-          Télécharger la carte Boissons
-        </a>
-        <div class="pdf-loaded-info" id="info-beverages" style="display:none">PDF enregistré</div>
+          <span>Voir la carte</span>
+        </button>
       </div>
     </div>
 
@@ -853,17 +862,11 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
         <li>Viandes &amp; spécialités régionales</li>
         <li>Finitions &amp; mignardises</li>
       </ul>
-      <div class="pdf-zone" id="zone-dinner">
-        <input type="file" accept=".pdf" id="upload-dinner" style="display:none" onchange="handlePDF(this,'dinner','Menu Dîner AW Riviera')">
-        <div class="pdf-upload-btn" id="upload-trigger-dinner" onclick="document.getElementById('upload-dinner').click()">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 5l4-4 4 4" stroke="currentColor" stroke-width="1.2"></path><path d="M1 11h12v2H1z" fill="currentColor" opacity=".3"></path></svg>
-          Ajouter le menu Dîner (PDF)
-        </div>
-        <a class="catering-pdf-btn" id="dl-dinner" style="display:none" download="Menu_Diner_AW_Riviera.pdf" href="#">
+      <div class="pdf-zone">
+        <button type="button" class="catering-menu-btn" onclick="openMenu('menus/menu-diner.pdf','Menu Dîner')">
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><path d="M1 1h8l4 4v10H1V1z" stroke="currentColor" stroke-width="1" fill="none"></path><path d="M9 1v4h4" stroke="currentColor" stroke-width="1" fill="none"></path><path d="M4 9h6M7 7v4" stroke="currentColor" stroke-width="1"></path></svg>
-          Télécharger le menu Dîner
-        </a>
-        <div class="pdf-loaded-info" id="info-dinner" style="display:none">PDF enregistré</div>
+          <span>Voir le menu</span>
+        </button>
       </div>
     </div>
   </div>
@@ -944,6 +947,18 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
     </form>
   </div>
 </section>
+
+<!-- PDF MENU MODAL (lightbox) -->
+<div class="menu-modal" id="menu-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="menu-modal-bar">
+    <div class="menu-modal-title" id="menu-modal-title">Menu</div>
+    <button type="button" class="menu-modal-close" id="menu-modal-close" aria-label="Fermer">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.4"></path></svg>
+    </button>
+  </div>
+  <div class="menu-modal-frame"><iframe id="menu-modal-iframe" title="Menu PDF" src="about:blank"></iframe></div>
+  <div class="menu-modal-hint" id="menu-modal-hint">Échap ou cliquez à l'extérieur pour fermer</div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -1051,39 +1066,37 @@ function replaceCateringPhoto(input, key) {
   reader.readAsDataURL(file);
 }
 
-// ── PDF MENUS (stored locally in the browser) ──
-const PDF_KEYS = { lunch: 'aw_pdf_lunch', beverages: 'aw_pdf_beverages', dinner: 'aw_pdf_dinner' };
+// ── PDF MENU MODAL (lightbox) ──
+const MENU_TITLES = {
+  'menus/menu-dejeuner.pdf': { fr: 'Menu Déjeuner', en: 'Lunch Menu' },
+  'menus/menu-boissons.pdf': { fr: 'Carte Boissons', en: 'Beverage List' },
+  'menus/menu-diner.pdf':    { fr: 'Menu Dîner', en: 'Dinner Menu' }
+};
+const _menuModal  = document.getElementById('menu-modal');
+const _menuIframe = document.getElementById('menu-modal-iframe');
+const _menuTitle  = document.getElementById('menu-modal-title');
 
-function handlePDF(input, key, label) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const b64 = e.target.result;
-    try { localStorage.setItem(PDF_KEYS[key], b64); } catch(err) { /* storage full */ }
-    setPDFReady(key, b64, file.name);
-  };
-  reader.readAsDataURL(file);
+function openMenu(src, fallbackTitle) {
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  const t = MENU_TITLES[src];
+  if (_menuTitle) _menuTitle.textContent = t ? t[lang] : (fallbackTitle || 'Menu');
+  if (_menuIframe) _menuIframe.src = src + '#view=FitH';
+  _menuModal.classList.add('open');
+  _menuModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
-
-function setPDFReady(key, dataUrl, filename) {
-  const trigger = document.getElementById('upload-trigger-' + key);
-  const dlBtn   = document.getElementById('dl-' + key);
-  const info    = document.getElementById('info-' + key);
-  if (!trigger || !dlBtn || !info) return;
-  dlBtn.href = dataUrl;
-  dlBtn.style.display = 'flex';
-  trigger.style.display = 'none';
-  info.textContent = filename || 'PDF chargé';
-  info.style.display = 'flex';
+function closeMenu() {
+  _menuModal.classList.remove('open');
+  _menuModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    if (!_menuModal.classList.contains('open') && _menuIframe) _menuIframe.src = 'about:blank';
+  }, 360);
 }
-
-// Restore saved PDFs on load
-window.addEventListener('DOMContentLoaded', () => {
-  Object.entries(PDF_KEYS).forEach(([key, storageKey]) => {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) setPDFReady(key, saved, 'PDF enregistré');
-  });
+document.getElementById('menu-modal-close').addEventListener('click', closeMenu);
+_menuModal.addEventListener('click', (e) => { if (e.target === _menuModal) closeMenu(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && _menuModal.classList.contains('open')) closeMenu();
 });
 
 // ── LANGUAGE (FR / EN) ──
@@ -1164,6 +1177,8 @@ const _T = {
     catNoteTitle: 'Une demande <em>spécifique</em> ?',
     catNoteText: 'Allergies, régimes particuliers, menu thématique, anniversaire en mer — chaque détail compte. Contactez-nous pour un service entièrement personnalisé.',
     catNoteCta: 'Faire une demande traiteur →',
+    catMenuBtns: ['Voir le menu','Voir la carte','Voir le menu'],
+    menuHint: "Échap ou cliquez à l'extérieur pour fermer",
     contactEyebrow: 'Nous contacter',
     contactTitle: 'Une <em>demande</em><br>sur mesure',
     contactText: 'Chaque projet est unique. Partagez vos envies en quelques mots — nous revenons vers vous sous 24 heures avec une proposition adaptée.',
@@ -1252,6 +1267,8 @@ const _T = {
     catNoteTitle: 'A <em>specific</em> request?',
     catNoteText: 'Allergies, special diets, themed menu, birthday at sea — every detail matters. Contact us for a fully personalised service.',
     catNoteCta: 'Submit a catering request →',
+    catMenuBtns: ['View menu','View list','View menu'],
+    menuHint: 'Esc or click outside to close',
     contactEyebrow: 'Contact us',
     contactTitle: 'A bespoke <em>request</em>',
     contactText: 'Every project is unique. Share your wishes in a few words — we get back to you within 24 hours with a tailored proposal.',
@@ -1344,6 +1361,9 @@ function setLang(lang) {
   if (catNoteText) catNoteText.innerHTML = t.catNoteText;
   const catNoteCta = document.querySelector('.catering-note-cta');
   if (catNoteCta) catNoteCta.textContent = t.catNoteCta;
+  document.querySelectorAll('.catering-menu-btn span').forEach((el, i) => { if (t.catMenuBtns && t.catMenuBtns[i]) el.textContent = t.catMenuBtns[i]; });
+  const menuHint = document.getElementById('menu-modal-hint');
+  if (menuHint && t.menuHint) menuHint.textContent = t.menuHint;
 
   // CONTACT
   if (secEyebrows[4]) secEyebrows[4].textContent = t.contactEyebrow;
