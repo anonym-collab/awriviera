@@ -109,16 +109,15 @@ body::after{
 .intro-media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
 .intro-media-shade{position:absolute;inset:0;background:rgba(5,12,22,.22);}
 .intro-title{
-  position:absolute;left:50%;top:50%;z-index:4;
-  transform:translate(-50%,-50%);transform-origin:center center;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-  mix-blend-mode:difference;color:#fff;pointer-events:none;text-align:center;
+  position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:4;
+  display:flex;align-items:center;justify-content:center;gap:.35em;
+  mix-blend-mode:difference;color:#fff;pointer-events:none;
   font-family:'Cormorant Garamond',serif;font-weight:300;
-  text-transform:uppercase;line-height:1;
-  will-change:transform,opacity;
+  text-transform:uppercase;letter-spacing:6px;
+  will-change:opacity;
 }
-.intro-word{font-size:30px;letter-spacing:5px;display:block;}
-.intro-word#introWordR{font-style:italic;letter-spacing:6px;}
+.intro-word{font-size:clamp(46px,11vw,150px);line-height:1;display:inline-block;will-change:transform;}
+.intro-word#introWordR{font-style:italic;}
 .intro-hint{
   position:absolute;bottom:42px;left:0;right:0;z-index:4;text-align:center;
   font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--cream);
@@ -1111,9 +1110,10 @@ window.addEventListener('scroll', () => {
 
     bg.style.opacity = String(1 - p);
 
-    // le titre tient dans le carré au départ, grandit avec le média puis disparaît
-    title.style.transform = 'translate(-50%,-50%) scale(' + (1 + p * 5) + ')';
-    title.style.opacity = String(1 - smoothstep(0.08, 0.5, p));
+    const tx = p * 26;
+    wordL.style.transform = 'translateX(-' + tx + 'vw)';
+    wordR.style.transform = 'translateX('  + tx + 'vw)';
+    title.style.opacity = String(1 - smoothstep(0.45, 0.9, p));
     hint.style.opacity  = String(1 - smoothstep(0, 0.12, raw));
 
     const hidden = p < 0.98;
