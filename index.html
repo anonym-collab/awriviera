@@ -49,6 +49,22 @@
 }
 </script>
 
+<!-- Données structurées FAQ (Google) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"Comment réserver avec AW Riviera ?","acceptedAnswer":{"@type":"Answer","text":"Contactez-nous via le formulaire, par email ou WhatsApp. Sous 24 heures, nous vous proposons une sélection personnalisée, sans engagement."}},
+    {"@type":"Question","name":"L'équipage est-il inclus ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Nos yachts sont proposés avec un équipage professionnel (capitaine, hôtesse, chef selon le bateau) pour un service irréprochable."}},
+    {"@type":"Question","name":"Dans quelles zones opérez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Sur toute la Côte d'Azur — Monaco, Nice, Antibes, Cannes, Saint-Tropez — et plus largement en Méditerranée (Corse, Sardaigne, Italie, Grèce, Baléares). Autres destinations sur demande."}},
+    {"@type":"Question","name":"Proposez-vous un service traiteur à bord ?","acceptedAnswer":{"@type":"Answer","text":"Oui, un traiteur sur mesure : déjeuners, dîners gastronomiques et cartes de boissons, adaptés à vos envies et à vos éventuelles restrictions alimentaires."}},
+    {"@type":"Question","name":"Peut-on acheter ou vendre un yacht via AW Riviera ?","acceptedAnswer":{"@type":"Answer","text":"Absolument. Nous vous accompagnons de la recherche à la transaction : évaluation technique, négociation, due diligence et transfert de propriété."}},
+    {"@type":"Question","name":"Quel est le délai de réponse ?","acceptedAnswer":{"@type":"Answer","text":"Nous garantissons une réponse sous 24 heures, en toute discrétion."}}
+  ]
+}
+</script>
+
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -479,6 +495,30 @@ nav a:not(.nav-cta):hover::after{width:100%;}
   padding:15px 34px;text-decoration:none;font-weight:500;transition:all .3s var(--ease);
 }
 .catering-note-cta:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 14px 34px -16px rgba(198,162,86,.7);}
+
+/* ── FAQ ── */
+.faq{padding:172px 64px;border-top:1px solid var(--border2);}
+.faq-header{text-align:center;margin-bottom:72px;}
+.faq-header::before{content:'';display:block;width:38px;height:1px;background:var(--gold);margin:0 auto 30px;opacity:.85;}
+.faq-eyebrow{font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+.faq-title{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:var(--white);line-height:1.1;letter-spacing:.5px;}
+.faq-title em{font-style:italic;color:var(--gold2);}
+.faq-list{max-width:840px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border2);}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:28px 44px 28px 0;position:relative;
+  font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--cream);font-weight:400;
+  transition:color .25s var(--ease);
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{
+  content:'+';position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  font-size:24px;color:var(--gold);transition:transform .3s var(--ease);font-family:'Jost',sans-serif;font-weight:300;
+}
+.faq-item[open] summary::after{content:'–';}
+.faq-item summary:hover{color:var(--gold2);}
+.faq-a{padding:0 44px 30px 0;color:var(--muted);font-size:14px;line-height:1.9;}
+@media(max-width:640px){.faq{padding:120px 30px;}.faq-title{font-size:38px;}.faq-item summary{font-size:19px;}}
 
 /* ── CONTACT ── */
 .contact{padding:172px 64px;border-top:1px solid var(--border2);display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;}
@@ -971,6 +1011,40 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-header reveal">
+    <div class="faq-eyebrow">Questions fréquentes</div>
+    <h2 class="faq-title">Vos <em>questions</em></h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item reveal">
+      <summary class="faq-q">Comment réserver avec AW Riviera ?</summary>
+      <div class="faq-a">Contactez-nous via le formulaire, par email ou WhatsApp. Sous 24 heures, nous vous proposons une sélection personnalisée, sans engagement.</div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">L'équipage est-il inclus ?</summary>
+      <div class="faq-a">Oui. Nos yachts sont proposés avec un équipage professionnel (capitaine, hôtesse, chef selon le bateau) pour un service irréprochable.</div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">Dans quelles zones opérez-vous ?</summary>
+      <div class="faq-a">Sur toute la Côte d'Azur — Monaco, Nice, Antibes, Cannes, Saint-Tropez — et plus largement en Méditerranée (Corse, Sardaigne, Italie, Grèce, Baléares…). Autres destinations sur demande.</div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">Proposez-vous un service traiteur à bord ?</summary>
+      <div class="faq-a">Oui, un traiteur sur mesure : déjeuners, dîners gastronomiques et cartes de boissons, adaptés à vos envies et à vos éventuelles restrictions alimentaires.</div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">Peut-on acheter ou vendre un yacht via AW Riviera ?</summary>
+      <div class="faq-a">Absolument. Nous vous accompagnons de la recherche à la transaction : évaluation technique, négociation, due diligence et transfert de propriété.</div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-q">Quel est le délai de réponse ?</summary>
+      <div class="faq-a">Nous garantissons une réponse sous 24 heures, en toute discrétion.</div>
+    </details>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-left reveal">
@@ -1327,6 +1401,10 @@ const _T = {
     catNoteCta: 'Faire une demande traiteur →',
     catMenuBtns: ['Voir le menu','Voir la carte','Voir le menu'],
     menuHint: "Échap ou cliquez à l'extérieur pour fermer",
+    faqEyebrow: 'Questions fréquentes',
+    faqTitle: 'Vos <em>questions</em>',
+    faqQ: ["Comment réserver avec AW Riviera ?","L'équipage est-il inclus ?","Dans quelles zones opérez-vous ?","Proposez-vous un service traiteur à bord ?","Peut-on acheter ou vendre un yacht via AW Riviera ?","Quel est le délai de réponse ?"],
+    faqA: ["Contactez-nous via le formulaire, par email ou WhatsApp. Sous 24 heures, nous vous proposons une sélection personnalisée, sans engagement.","Oui. Nos yachts sont proposés avec un équipage professionnel (capitaine, hôtesse, chef selon le bateau) pour un service irréprochable.","Sur toute la Côte d'Azur — Monaco, Nice, Antibes, Cannes, Saint-Tropez — et plus largement en Méditerranée (Corse, Sardaigne, Italie, Grèce, Baléares…). Autres destinations sur demande.","Oui, un traiteur sur mesure : déjeuners, dîners gastronomiques et cartes de boissons, adaptés à vos envies et à vos éventuelles restrictions alimentaires.","Absolument. Nous vous accompagnons de la recherche à la transaction : évaluation technique, négociation, due diligence et transfert de propriété.","Nous garantissons une réponse sous 24 heures, en toute discrétion."],
     contactEyebrow: 'Nous contacter',
     contactTitle: 'Une <em>demande</em><br>sur mesure',
     contactText: 'Chaque projet est unique. Partagez vos envies en quelques mots — nous revenons vers vous sous 24 heures avec une proposition adaptée.',
@@ -1417,6 +1495,10 @@ const _T = {
     catNoteCta: 'Submit a catering request →',
     catMenuBtns: ['View menu','View list','View menu'],
     menuHint: 'Esc or click outside to close',
+    faqEyebrow: 'Frequently asked questions',
+    faqTitle: 'Your <em>questions</em>',
+    faqQ: ["How do I book with AW Riviera?","Is the crew included?","Which areas do you operate in?","Do you offer on-board catering?","Can I buy or sell a yacht through AW Riviera?","What is your response time?"],
+    faqA: ["Contact us via the form, by email or WhatsApp. Within 24 hours, we send you a personalised selection, with no obligation.","Yes. Our yachts come with a professional crew (captain, hostess, chef depending on the vessel) for flawless service.","Across the whole French Riviera — Monaco, Nice, Antibes, Cannes, Saint-Tropez — and more widely across the Mediterranean (Corsica, Sardinia, Italy, Greece, Balearics…). Other destinations on request.","Yes, bespoke catering: lunches, gastronomic dinners and beverage lists, tailored to your wishes and any dietary requirements.","Absolutely. We guide you from search to transaction: technical appraisal, negotiation, due diligence and title transfer.","We guarantee a response within 24 hours, in complete discretion."],
     contactEyebrow: 'Contact us',
     contactTitle: 'A bespoke <em>request</em>',
     contactText: 'Every project is unique. Share your wishes in a few words — we get back to you within 24 hours with a tailored proposal.',
@@ -1514,6 +1596,14 @@ function setLang(lang) {
   document.querySelectorAll('.catering-menu-btn span').forEach((el, i) => { if (t.catMenuBtns && t.catMenuBtns[i]) el.textContent = t.catMenuBtns[i]; });
   const menuHint = document.getElementById('menu-modal-hint');
   if (menuHint && t.menuHint) menuHint.textContent = t.menuHint;
+
+  // FAQ
+  const faqEb = document.querySelector('.faq-eyebrow');
+  if (faqEb && t.faqEyebrow) faqEb.textContent = t.faqEyebrow;
+  const faqTt = document.querySelector('.faq-title');
+  if (faqTt && t.faqTitle) faqTt.innerHTML = t.faqTitle;
+  document.querySelectorAll('.faq-q').forEach((el, i) => { if (t.faqQ && t.faqQ[i]) el.textContent = t.faqQ[i]; });
+  document.querySelectorAll('.faq-a').forEach((el, i) => { if (t.faqA && t.faqA[i]) el.innerHTML = t.faqA[i]; });
 
   // CONTACT
   if (secEyebrows[4]) secEyebrows[4].textContent = t.contactEyebrow;
