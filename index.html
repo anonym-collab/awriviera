@@ -355,6 +355,8 @@ nav a:not(.nav-cta):hover::after{width:100%;}
 }
 .service-items li:last-child{border-bottom:none;}
 .service-items li::before{content:'—  ';color:var(--gold);font-size:10px;}
+.service-link{display:inline-block;margin-top:28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);text-decoration:none;transition:color .25s var(--ease),gap .25s;}
+.service-link:hover{color:var(--gold);}
 
 /* ── DESTINATIONS ── */
 .destinations{padding:172px 0 0;border-top:1px solid var(--border2);}
@@ -729,6 +731,7 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
         <li>Itinéraires personnalisés</li>
         <li>Provisionnement &amp; services à bord</li>
       </ul>
+      <a href="charter.html" class="service-link">En savoir plus →</a>
     </div>
     <div class="service reveal reveal-d1">
       <div class="service-num">02</div>
@@ -742,6 +745,7 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
         <li>Due diligence &amp; sea trial</li>
         <li>Transfert de propriété</li>
       </ul>
+      <a href="vente-achat.html" class="service-link">En savoir plus →</a>
     </div>
     <div class="service reveal reveal-d2">
       <div class="service-num">03</div>
@@ -755,6 +759,7 @@ footer{padding:64px;border-top:1px solid var(--border);display:grid;grid-templat
         <li>Restaurants &amp; réservations VIP</li>
         <li>Packages combinés sur mesure</li>
       </ul>
+      <a href="conciergerie.html" class="service-link">En savoir plus →</a>
     </div>
   </div>
 </section>
@@ -1349,6 +1354,7 @@ const _T = {
     ],
     srvEyebrow: 'Ce que nous faisons',
     srvTitle: 'Nos <em>services</em>',
+    srvLink: 'En savoir plus →',
     srvTitles: ['Charter Yacht','Vente de Yacht','Lifestyle &amp; Concierge'],
     srvTexts: [
       'Location à la semaine ou plus. Du voilier élégant au superyacht à moteur. Nous trouvons le bateau idéal pour votre groupe, votre destination et votre budget.',
@@ -1443,6 +1449,7 @@ const _T = {
     ],
     srvEyebrow: 'What we do',
     srvTitle: 'Our <em>services</em>',
+    srvLink: 'Learn more →',
     srvTitles: ['Yacht Charter','Yacht Sales','Lifestyle &amp; Concierge'],
     srvTexts: [
       'Weekly charter or longer. From elegant sailing yachts to motor superyachts. We find the ideal boat for your group, destination and budget.',
@@ -1563,6 +1570,7 @@ function setLang(lang) {
     if (!t.srvItems[i]) return;
     ul.querySelectorAll('li').forEach((li, j) => { if (t.srvItems[i][j]) li.innerHTML = t.srvItems[i][j]; });
   });
+  document.querySelectorAll('.service-link').forEach(a => { if (t.srvLink) a.textContent = t.srvLink; });
 
   // DESTINATIONS
   if (secEyebrows[1]) secEyebrows[1].textContent = t.destEyebrow;
